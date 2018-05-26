@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AR 识别 Test</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <script type="text/javascript" src="http://g.alicdn.com/hybrid/api/4.0.3/index.js"></script>
+    
+    <!-- <script type="text/javascript" src="./libs/three.js"></script> -->
+    <!-- <script type="text/javascript" src="./libs/ARObject.js"></script> -->
+
+    <script type="text/javascript" src="Zepto.js"></script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #fff;
+            background: none;
+        }
+
+        html{
+            background: none;
+        }
+
+        h3{
+            color: red;
+        }
+
+        div {
+            font-family: arial;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        * {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        #container{
+            background: none;
+            background: transparent;
+        }
+
+
+        #enable_builtin{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #disable_builtin{
+            position: absolute;
+            top: 0px;
+            right: 101px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #enable_webcache{
+            position: absolute;
+            top: 0px;
+            right: 202px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #disable_webcache{
+            position: absolute;
+            top: 0px;
+            right: 303px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #clear_webcache{
+            position: absolute;
+            top: 0px;
+            right: 404px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #dismiss_input{
+            position: absolute;
+            top: 41px;
+            right: 0px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #enableOverrideBackPressed{
+            position: absolute;
+            top: 82px;
+            right: 0px;
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #disableOverrideBackPressed{
+            position: absolute;
+            top: 82px;
+            right: 201px;
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #performNativeBackPressed{
+            position: absolute;
+            top: 82px;
+            right: 402px;
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #performTTS{
+            position: absolute;
+            top: 123px;
+            right: 0px;
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #mc_bind{
+            position: absolute;
+            top: 164px;
+            right: 0px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #mc_setAcceptTag_aa{
+            position: absolute;
+            top: 164px;
+            right: 102px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #mc_setAcceptTag_bb{
+            position: absolute;
+            top: 164px;
+            right: 204px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #mc_cancelAllNotification{
+            position: absolute;
+            top: 164px;
+            right: 306px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #mc_cancelNotification{
+            position: absolute;
+            top: 164px;
+            right: 408px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #print{
+            position: absolute;
+            top: 205px;
+            right: 0px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #zoloInit{
+            position: absolute;
+            top: 246px;
+            right: 0px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #zoloGetFaceToken{
+            position: absolute;
+            top: 246px;
+            right: 101px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #landiPay{
+            position: absolute;
+            top: 287px;
+            right: 0px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #landiRevert{
+            position: absolute;
+            top: 287px;
+            right: 101px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #landiSign{
+            position: absolute;
+            top: 287px;
+            right: 142px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #printTest{
+            position: absolute;
+            top: 328px;
+            right: 0px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #getWeight{
+            position: absolute;
+            top: 369px;
+            right: 0px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #getStand{
+            position: absolute;
+            top: 369px;
+            right: 0px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #setZero{
+            position: absolute;
+            top: 369px;
+            right: 101px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #setTare{
+            position: absolute;
+            top: 369px;
+            right: 202px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        #clearTare{
+            position: absolute;
+            top: 369px;
+            right: 303px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background: green;
+            color: white;
+        }
+
+        h3{
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="enable_builtin">
+        enable_builtin
+    </div>
+    <div id="disable_builtin">
+        disable_builtin
+    </div>
+    <div id="enable_webcache">
+        enable_webcache
+    </div>
+    <div id="disable_webcache">
+        disable_webcache
+    </div>
+    <div id="clear_webcache">
+        clear_webcache
+    </div>
+    <div id="dismiss_input">
+        dismiss_input
+    </div>
+    <div id="enableOverrideBackPressed">
+        enableOverrideBackPressed
+    </div>
+    <div id="disableOverrideBackPressed">
+        disableOverrideBackPressed
+    </div>
+    <div id="performNativeBackPressed">
+        performNativeBackPressed
+    </div>
+    <dir id="performTTS">
+        performTTS
+    </dir>
+
+    <dir id="mc_bind">
+        bind messageCenter
+    </dir>
+    <dir id="mc_setAcceptTag_aa">
+        setUserId aa
+    </dir>
+    <dir id="mc_setAcceptTag_bb">
+        setUserId bb
+    </dir>
+    <dir id="mc_cancelAllNotification">
+        cancel all
+    </dir>
+    <dir id="mc_cancelNotification">
+        cancel
+    </dir>
+    <dir id="print">
+        print
+    </dir>
+
+    <dir id="zoloInit">
+        zoloInit
+    </dir>
+
+    <dir id="zoloGetFaceToken">
+        zoloGetFaceToken
+    </dir>
+
+    <dir id="landiPay">
+        landiPay
+    </dir>
+
+    <dir id="landiRevert">
+        landiRevert
+    </dir>
+
+    <dir id="landiSign">
+        landiSign
+    </dir>
+
+    <dir id="printTest">
+        printTest
+    </dir>
+
+    <dir id="getStand">
+        getStand
+    </dir>
+    <dir id="setZero">
+        setZero
+    </dir>
+    <dir id="setTare">
+        setTare
+    </dir>
+    <dir id="clearTare">
+        clearTare
+    </dir>
+</body>
+<script type="text/javascript" src="index.js"></script>
+
+</html>
